@@ -239,7 +239,7 @@ def read_column(infile,column_name,outtype='float'):
         column = column_data.astype(getattr(np,outtype))
     return column
 
-def cleannovonix(infile):
+def cleannovonix(infile,overwrite=False):
     """
     Given a Novonix file remove blank lines, correct the header
     and remove failed tests if needed.
@@ -248,6 +248,11 @@ def cleannovonix(infile):
     ----------
     infile : string
         Name of the input Novonix file
+
+    overwrite: boolean
+        Yes : overwrite the input file
+        No  : a new file will be created, appending '_prep' at the end of the
+              original file file
 
     Output:
     -------
@@ -371,7 +376,7 @@ def cleannovonix(infile):
         move(tmp_file,infile)
     return
 
-def novonix_add_state(infile,verbose=False):
+def novonix_add_state(infile,overwrite=False,verbose=False):
     """
     Given a cleaned Novonix data file, it adds a 'State' column, 
     which mimimcs Basytec format with:
@@ -388,12 +393,17 @@ def novonix_add_state(infile,verbose=False):
     infile : string
         Name of the input Novonix file
 
+    overwrite: boolean
+        Yes : overwrite the input file
+        No  : a new file will be created, appending '_prep' at the end of the
+              original file file
+
     verbose : boolean
-        Yes = print out some informative statements
+        Yes : print out some informative statements
 
     Example
     -------
-    $ python novonix_add_state.py [path to Novonix file]
+    $ python novonix_add_state([path to Novonix file],overwrite=False,verbose=True)
 
     """
     
@@ -733,7 +743,7 @@ def reduced_protocol(infile,verbose=False):
 
     return protocol,viable_prot
 
-def novonix_add_loopnr(infile,verbose=False):
+def novonix_add_loopnr(infile,overwrite=False,verbose=False):
     """
     Given a cleaned Novonix data file, it adds a 'LoopNr' column, 
     with monotonically increasing numbers and 
@@ -747,12 +757,17 @@ def novonix_add_loopnr(infile,verbose=False):
     infile : string
         Name of the input Novonix file
 
+    overwrite: boolean
+        Yes : overwrite the input file
+        No  : a new file will be created, appending '_prep' at the end of the
+              original file file
+
     verbose : boolean
         Yes = print out some informative statements
 
     Example
     -------
-    $ python novonix_add_loopnr.py [path to cleaned Novonix file]
+    $ python novonix_add_loopnr [path to cleaned Novonix file]
 
     """
 
@@ -927,7 +942,7 @@ def novonix_add_loopnr(infile,verbose=False):
 
     return
 
-def prepare_novonix(infile,verbose=False,lprotocol=False):
+def prepare_novonix(infile,addstate=False,lprotocol=False,overwrite=False,verbose=False):
     """
     Given a Novonix data file, it prepare it to be handled.
 
@@ -944,7 +959,7 @@ def prepare_novonix(infile,verbose=False,lprotocol=False):
 
     Example
     -------
-    $ python prepare_novonix.py [path to Novonix file]
+    $ python prepare_novonix([path to Novonix file])
 
     """
     
@@ -959,16 +974,17 @@ def prepare_novonix(infile,verbose=False,lprotocol=False):
     if (not answer): sys.exit('STOP Input not from Novonix, {}'.format(file_to_open))
 
     # Clean the Novonix file
-    cleannovonix(file_to_open)
+    cleannovonix(file_to_open,overwrite=overwrite)
 
-    # Check if the file has a State column and if not, create it
-    novonix_add_state(file_to_open,verbose=verbose)
+    if addstate:
+        # Check if the file has a State column and if not, create it
+        novonix_add_state(file_to_open,overwrite=overwrite,verbose=verbose)
 
     if lprotocol:
         # Check if the file has a Loop number and Protocol line columns
         # and if not, create it
-        novonix_add_loopnr(file_to_open,verbose=verbose)
+        novonix_add_loopnr(file_to_open,overwrite=overwrite,verbose=verbose)
     
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        prepare_novonix(sys.argv[1],verbose=True,lprotocol=True)
+        prepare_novonix(sys.argv[1],addstate=True,lprotocol=True,overwrite=False,verbose=True)
