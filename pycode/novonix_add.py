@@ -794,7 +794,9 @@ def novonix_add_loopnr(infile,verbose=False):
     """
     Given a cleaned Novonix data file, it adds a 'LoopNr' column, 
     with monotonically increasing numbers and 
-    the protocol line corresponding to a given measurement.
+    the protocol line corresponding to a given measurement. 
+
+    Measurements that are not being repeated are assinged: LoopNr=0.
 
     This values are determined by the change in the 'State' and 
     the protocol description in the header
