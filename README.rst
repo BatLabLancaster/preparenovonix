@@ -16,7 +16,7 @@ start at the sum of the capacities from the failed tests, instead of 0
 (*cleannovonix* function).
 
 The extra information that can be created for **cleaned** files
-(functions: '''novonix_add_state''' and '''novonix_add_loopnr''') is:
+(functions: *novonix_add_state* and *novonix_add_loopnr*) is:
 
 -  A 'State' column with 0 for the first measurement of a particular
    step, 1 for regular data points, 2 to indicate the last measurement
@@ -44,15 +44,19 @@ Running this code from MatLab
 -----------------------------
 
 In your code add the 'pycode' folder to your search path:
-..code::Matlab
-  addpath(genpath('pycode'))
+
+.. code-block:: Matlab
+		
+   addpath(genpath('pycode'))
 
 Try to run the code catching exceptions:
-..code::Matlab
-  try
-     py.pycode.novonix_add.prepare_novonix(file_to_open,pyargs('verbose','False','lprotocol','True'));
-  catch e e.message if(isa(e,'matlab.exception.PyException'))
-     e.ExceptionObject end
+
+.. code-block:: Matlab
+		
+   try
+		py.pycode.novonix_add.prepare_novonix(file_to_open,pyargs('verbose','False','lprotocol','True'));
+   catch e e.message if(isa(e,'matlab.exception.PyException'))
+		e.ExceptionObject end
 
 Ensure that Matlab can see your installation of Python by running
 `pyversion`_. If Matlab cannot see python, once you know where your
@@ -71,6 +75,7 @@ any version of Novonix software report an issue. Note that an example
 file will be needed in order to improve the code. List of the `Novonix`_
 software. If you encounter issues running the code for any version of Novonix software report an issue. Note that an example file will be needed in order to improve the code.
 List of the `Novonix`_ software versions the code has been tested against:
+
 -  3.0.2.3
 -  3.0.2.1
 -  TO
@@ -78,4 +83,4 @@ List of the `Novonix`_ software versions the code has been tested against:
 -  1.9.4.0
 
 .. _Novonix: http://www.novonix.ca/
-.. _``pyversion``: https://uk.mathworks.com/help/matlab/getting-started-with-python.html
+.. _pyversion: https://uk.mathworks.com/help/matlab/getting-started-with-python.html
