@@ -3,17 +3,17 @@ Prepare Novonix
 
 This code handles common issues encountered in files generated with a
 range of `Novonix`_ software versions and it can add extra information.
-There is a master function '''prepare_novonix''' that can run at once
+There is a master function *prepare_novonix* that can run at once
 all the available features, providing also flexibility to only choose
 some.
 
 The code can be used to test if a file has the expected structure for a
-`Novonix`_ file ('''isnovoix''' function) and to read a specific column
-from a raw `Novonix`_ file ('''read_column''' function). Files can be
+`Novonix`_ file (*isnovoix* function) and to read a specific column
+from a raw `Novonix`_ file (*read_column* function). Files can be
 cleanned from empty lines and characters added after the ']' in the
 header and failed tests are handled by modifying the capacity column to
 start at the sum of the capacities from the failed tests, instead of 0
-('''cleannovonix''' function).
+(*cleannovonix* function).
 
 The extra information that can be created for **cleaned** files
 (functions: '''novonix_add_state''' and '''novonix_add_loopnr''') is:
@@ -37,27 +37,30 @@ within PowerShell and ConEmu BashShell in Windows 10.
 Example
 -------
 
-The '''example.py''' runs over the given example data. To run this
-example, simply type: ''' python example.py '''
+The **example.py** runs over the given example data. To run this
+example, simply type: :bash:`python example.py`.
 
 Running this code from MatLab
 -----------------------------
 
-In your code add the 'pycode' folder to your search path: '''Matlab
-addpath(genpath('pycode')); '''
+In your code add the 'pycode' folder to your search path:
+..code::Matlab
+  addpath(genpath('pycode'))
 
-Try to run the code catching exceptions: '''Matlab try
-py.pycode.novonix_add.prepare_novonix(file_to_open,pyargs('verbose','False','lprotocol','True'));
-catch e e.message if(isa(e,'matlab.exception.PyException'))
-e.ExceptionObject end '''
+Try to run the code catching exceptions:
+..code::Matlab
+  try
+     py.pycode.novonix_add.prepare_novonix(file_to_open,pyargs('verbose','False','lprotocol','True'));
+  catch e e.message if(isa(e,'matlab.exception.PyException'))
+     e.ExceptionObject end
 
 Ensure that Matlab can see your installation of Python by running
-```pyversion```_. If Matlab cannot see python, once you know where your
+`pyversion`_. If Matlab cannot see python, once you know where your
 Python executable is (within a python terminal you can do this by
-typing: ``import os, sys ; os.path.dirname(sys.executable)``), type
-within your MatLab interpreter ``pyversion [path to python executable]``
+typing: :bash:`import os, sys ; os.path.dirname(sys.executable)`), type
+within your MatLab interpreter :bash:`pyversion [path to python executable]`
 and check that now the path to Python was recognised with
-```pyversion```_.
+`pyversion`_.
 
 Compatibility
 -------------
@@ -68,11 +71,11 @@ any version of Novonix software report an issue. Note that an example
 file will be needed in order to improve the code. List of the `Novonix`_
 software. If you encounter issues running the code for any version of Novonix software report an issue. Note that an example file will be needed in order to improve the code.
 List of the `Novonix`_ software versions the code has been tested against:
-- 3.0.2.3
-- 3.0.2.1
-- TO
-- 2.0.0.7
-- 1.9.4.0
+-  3.0.2.3
+-  3.0.2.1
+-  TO
+-  2.0.0.7
+-  1.9.4.0
 
 .. _Novonix: http://www.novonix.ca/
 .. _``pyversion``: https://uk.mathworks.com/help/matlab/getting-started-with-python.html
