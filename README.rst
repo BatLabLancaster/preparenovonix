@@ -1,5 +1,5 @@
-Prepare Novonix
-===============
+Prepare Novonix Data
+====================
 
 This code handles common issues encountered in files generated with a
 range of `Novonix`_ software versions and it can add extra information.
