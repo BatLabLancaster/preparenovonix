@@ -38,7 +38,7 @@ Example
 -------
 
 The **example.py** runs over the given example data. To run this
-example, simply type: :bash:`python example.py`.
+example, simply type: :code:`python example.py`.
 
 Running this code from MatLab
 -----------------------------
@@ -61,8 +61,8 @@ Try to run the code catching exceptions:
 Ensure that Matlab can see your installation of Python by running
 `pyversion`_. If Matlab cannot see python, once you know where your
 Python executable is (within a python terminal you can do this by
-typing: :bash:`import os, sys ; os.path.dirname(sys.executable)`), type
-within your MatLab interpreter :bash:`pyversion [path to python executable]`
+typing: :python:`import os, sys ; os.path.dirname(sys.executable)`), type
+within your MatLab interpreter :MatLab:`pyversion [path to python executable]`
 and check that now the path to Python was recognised with
 `pyversion`_.
 
