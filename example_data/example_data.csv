@@ -1,16 +1,16 @@
 [Summary]
 Novonix HPC data file
 Novonix
-Channel: **
+Channel: ****
 Cell: ****
-Serial Number: *
+Serial Number: ****
 Experiment Number: Enter cell description...
 Description: Description
 Protocol: ****
 Mass (g): ****
-Capacity (Ah): ****
+Capacity (Ah): **** 
 Area (cm^2): ****
-DC Offset Voltage (V): ****
+DC Offset Voltage (V): **** 
 Started: */*/2019 9:33:48 AM
 Version: 3.0.2.1
 [End Summary]
@@ -1621,16 +1621,16 @@ Date and Time,Cycle Number,Step Number,Run Time (h), Step Time (h),Current (A),P
 [Summary]
 Novonix HPC data file
 Novonix
-Channel: **
+Channel: ****
 Cell: ****
-Serial Number: *
+Serial Number: **** 
 Experiment Number: Enter cell description...
 Description: Description
 Protocol: ****
 Mass (g): ****
-Capacity (Ah): **** 
+Capacity (Ah): ****
 Area (cm^2): ****
-DC Offset Voltage (V): **** 
+DC Offset Voltage (V): ****
 Started: */*/2019 7:41:32 PM
 Version: 3.0.2.1
 [End Summary]
