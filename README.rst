@@ -1,5 +1,5 @@
-.. image:: https://readthedocs.org/projects/pip/badge/?version=stable
-:target: http://pip.pypa.io/en/stable/?badge=stable
+.. image:: https://readthedocs.org/projects/prepare-novonix-data/badge/?version=latest
+:target: https://prepare-novonix-data.readthedocs.io/en/latest/?badge=latest
 :alt: Documentation Status
 
 Prepare Novonix Data
