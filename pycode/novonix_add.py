@@ -56,17 +56,17 @@ def select_com_val(index):
     Establish the selection statement for the
     one or two possible command values (com_val#)
 
-    Parameters:
+    Parameters
     -----------
     index : integer
        Index within the above arrays com_val1, com_val2
 
-    Returns:
+    Returns
     --------
     sel : string
        String with the selection using either one or two values
 
-    Examples:
+    Examples
     ---------
     >>>> import pycode.novonix_add as prep
 
@@ -85,17 +85,17 @@ def isnovonix(infile):
     if looks like a Novonix file, allowing for blank lines
     and commas after the commands due to having open the file in Excel
 
-    Parameters:
+    Parameters
     ----------
     infile : string
         Name of the input Novonix file
 
-    Returns:
+    Returns
     --------
     answer : boolean
         Yes=the file seems to be a Novonix file
 
-    Examples:
+    Examples
     ---------
     >>>> import pycode.novonix_add as prep
 
@@ -169,7 +169,7 @@ def icolumn(infile,column_name):
     Given a Novonix data file, find the column position of the
     given column_name
 
-    Parameters:
+    Parameters
     -----------
     infile : string
         Name of the input Novonix file
@@ -181,13 +181,13 @@ def icolumn(infile,column_name):
         icolumn = -1 : the column has not been found.
         If icolumn > -1: icolumn is the index of the column.
 
-    Returns:
+    Returns
     --------
     icol : integer
        Position of the column with name 'column_name', 
        in the range form 0 to the number of columns - 1
 
-    Examples:
+    Examples
     ---------
     >>>> import pycode.novonix_add as prep
 
@@ -226,7 +226,7 @@ def read_column(infile,column_name,outtype='float'):
     Given a Novonix data file, read a column as an array of the
     type given in the variable astype.
 
-    Parameters:
+    Parameters
     -----------
     infile : string
         Name of the input Novonix file
@@ -237,12 +237,12 @@ def read_column(infile,column_name,outtype='float'):
     outtype : string
         Type of data of the column to be read
 
-    Returns:
+    Returns
     --------
     column_data : numpy array of the given type
         Column of interest read as a str
 
-    Examples:
+    Examples
     ---------
     >>>> import pycode.novonix_add as prep
 
@@ -293,16 +293,16 @@ def cleannovonix(infile):
     Given a Novonix file remove blank lines, correct the header
     and remove failed tests if needed.
 
-    Parameters:
+    Parameters
     -----------
     infile : string
         Name of the input Novonix file
 
-    Returns:
-    ---------
-    Cleaned Novonix file
+    Notes
+    -----
+    This code returns a cleaned Novonix file
 
-    Examples:
+    Examples
     ---------
     >>>> import pycode.novonix_add as prep
 
@@ -438,7 +438,7 @@ def novonix_add_state(infile,verbose=False):
     This values are determined by the change in the 'Step Number' from Novonix
     and the 'Step time', which goes to 0 with each new 'Step'.
 
-    Parameters:
+    Parameters
     -----------
     infile : string
         Name of the input Novonix file
@@ -446,12 +446,11 @@ def novonix_add_state(infile,verbose=False):
     verbose : boolean
         Yes : print out some informative statements
 
+    Notes
+    -----
+    This code returns a Novonix file with an extra 'State' column.
 
-    Returns:
-    --------
-    File with a new column
-
-    Examples:
+    Examples
     ---------
     >>>> import pycode.novonix_add as prep
 
@@ -580,7 +579,7 @@ def reduced_protocol(infile,verbose=False):
     Given a Novonix data file, get a reduced protocol 
     with one command per line.
 
-    Parameters:
+    Parameters
     -----------
     infile : string
         Name of the input Novonix file
@@ -588,12 +587,12 @@ def reduced_protocol(infile,verbose=False):
     verbose : boolean
         Yes = print out some informative statements
 
-    Returns:
+    Returns
     --------
     protocol : list
         List with the reduced protocol
 
-    Examples:
+    Examples
     ---------
     >>>> import pycode.novonix_add as prep
 
@@ -817,7 +816,7 @@ def novonix_add_loopnr(infile,verbose=False):
     This values are determined by the change in the 'State' and 
     the protocol description in the header
 
-    Parameters:
+    Parameters
     -----------
     infile : string
         Name of the input Novonix file
@@ -825,11 +824,11 @@ def novonix_add_loopnr(infile,verbose=False):
     verbose : boolean
         Yes = print out some informative statements
 
-    Returns:
-    --------
-    File with 2 new columns
+    Notes
+    -----
+    This code returns a Novonix file with two extra columns.
 
-    Examples:
+    Examples
     ---------
     >>>> import pycode.novonix_add as prep
 
@@ -1012,7 +1011,7 @@ def prepare_novonix(infile,addstate=False,lprotocol=False,overwrite=False,verbos
     """
     Given a Novonix data file, it prepare it to be handled.
 
-    Parameters:
+    Parameters
     -----------
     infile : string
         Name of the input Novonix file
@@ -1032,11 +1031,12 @@ def prepare_novonix(infile,addstate=False,lprotocol=False,overwrite=False,verbos
         Yes = print out some informative statements
 
 
-    Returns:
-    --------
-    Clean Novonix file with, possibly, 3 extra columns.
+    Notes
+    -----
+    This function returns a clean Novonix file with, possibly,
+    3 extra columns.
 
-    Examples:
+    Examples
     ---------
     >>>> import pycode.novonix_add as prep
 

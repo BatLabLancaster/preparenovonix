@@ -54,15 +54,16 @@ Try to run the code catching exceptions:
 .. code-block:: Matlab
 		
    try
-		py.pycode.novonix_add.prepare_novonix(file_to_open,pyargs('verbose','False','lprotocol','True'));
+	  py.pycode.novonix_add.prepare_novonix(file_to_open,pyargs('verbose','False','lprotocol','True'));
    catch e e.message if(isa(e,'matlab.exception.PyException'))
-		e.ExceptionObject end
+	  e.ExceptionObject
+   end
 
 Ensure that Matlab can see your installation of Python by running
 `pyversion`_. If Matlab cannot see python, once you know where your
 Python executable is (within a python terminal you can do this by
-typing: :python:`import os, sys ; os.path.dirname(sys.executable)`), type
-within your MatLab interpreter :MatLab:`pyversion [path to python executable]`
+typing: :code:`import os, sys ; os.path.dirname(sys.executable)`), type
+within your MatLab interpreter :code:`pyversion [path to python executable]`
 and check that now the path to Python was recognised with
 `pyversion`_.
 
