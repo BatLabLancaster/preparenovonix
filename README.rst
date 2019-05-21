@@ -1,4 +1,4 @@
-|docs|
+|docs| |zenodo| 
 
 Prepare Novonix Data
 ====================
@@ -91,3 +91,6 @@ List of the `Novonix`_ software versions the code has been tested against:
 .. |docs| image:: https://readthedocs.org/projects/prepare-novonix-data/badge/?version=latest
    :target: https://prepare-novonix-data.readthedocs.io/en/latest/?badge=latest
    :alt: Documentation Status
+
+.. |zenodo| image:: https://zenodo.org/badge/186994865.svg
+   :target: https://zenodo.org/badge/latestdoi/186994865
