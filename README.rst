@@ -1,6 +1,4 @@
-.. image:: https://readthedocs.org/projects/prepare-novonix-data/badge/?version=latest
-:target: https://prepare-novonix-data.readthedocs.io/en/latest/?badge=latest
-:alt: Documentation Status
+|docs|
 
 Prepare Novonix Data
 ====================
@@ -89,3 +87,7 @@ List of the `Novonix`_ software versions the code has been tested against:
 
 .. _Novonix: http://www.novonix.ca/
 .. _pyversion: https://uk.mathworks.com/help/matlab/getting-started-with-python.html
+
+.. |docs| image:: https://readthedocs.org/projects/prepare-novonix-data/badge/?version=latest
+   :target: https://prepare-novonix-data.readthedocs.io/en/latest/?badge=latest
+   :alt: Documentation Status
