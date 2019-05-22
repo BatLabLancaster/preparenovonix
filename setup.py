@@ -5,7 +5,7 @@ with open("README.rst","r") as fh:
     
 setuptools.setup(
     name='preparenovonix',
-    version='0.0.1',
+    version='0.0.2',
     py_modules=['preparenovonix'],
     description="Clean and add extra information to data produced by the battery cyclers from Novonix.",
     long_description=long_description,
