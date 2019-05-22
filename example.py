@@ -1,4 +1,4 @@
-import pycode.novonix_add as prep
+import preparenovonix.novonix_add as prep
 
 infile = 'example_data/example_data.csv'
 
