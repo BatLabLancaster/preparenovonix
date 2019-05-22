@@ -1,0 +1,15 @@
+language: python
+sudo: required
+
+services:
+ - docker
+env:
+ global:
+  - numpy_version = 1.15.4
+  - pathlib = 1.0.1
+  
+rvm:
+ - 3.7.1
+ - numpy
+ - pathlib
+ 

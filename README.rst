@@ -1,4 +1,4 @@
-|docs| |zenodo| 
+|build| |docs| |zenodo| 
 
 Prepare Novonix Data
 ====================
@@ -87,6 +87,9 @@ List of the `Novonix`_ software versions the code has been tested against:
 
 .. _Novonix: http://www.novonix.ca/
 .. _pyversion: https://uk.mathworks.com/help/matlab/getting-started-with-python.html
+
+.. |build| image:: https://travis-ci.org/BatLabLancaster/preparenovonix.svg?branch=master
+    :target: https://travis-ci.org/BatLabLancaster/preparenovonix
 
 .. |docs| image:: https://readthedocs.org/projects/prepare-novonix-data/badge/?version=latest
    :target: https://prepare-novonix-data.readthedocs.io/en/latest/?badge=latest
