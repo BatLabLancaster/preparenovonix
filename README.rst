@@ -29,18 +29,31 @@ The extra information that can be created for **cleaned** files
 -  A 'Loop number' column with 0s when commands are not repeated and
    monotoncally increasing integers starting from 1, to indicate the
    repetition number.
-
-Requirements
-------------
-
-This code has been developed in Python 3.7.1 and tested from Matlab and
-within PowerShell and ConEmu BashShell in Windows 10.
-
+   
 Example
 -------
 
 The **example.py** runs over the given example data. To run this
 example, simply type: :code:`python example.py`.
+
+Requirements and Installation
+-----------------------------
+
+This code has been developed in Python 3.7.1 and is compatible with Python above 3.4 versions. The code has been tested to run in both Windows and Linux OS. It has been tested to run within Matlab R2018a.
+
+This code uses numpy and pathlib as specified in docs/requirements.txt.
+
+The code can be run directly from a cloned repository or can also be installed as a python package through pip:
+
+.. code::
+
+   pip install preparenovonix
+
+Then the functions can be used after importing novonix_add, for example as follows:
+
+.. code-block:: python
+
+   import preparenovonix.novonix_add as prep
 
 Running this code from MatLab
 -----------------------------
