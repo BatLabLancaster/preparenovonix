@@ -1,15 +1,17 @@
+# After changing this file, check it on:
+#   http://lint.travis-ci.org/
 language: python
-sudo: required
-
-services:
- - docker
-env:
- global:
-  - numpy_version = 1.15.4
-  - pathlib = 1.0.1
-  
-rvm:
- - 3.7.1
- - numpy
- - pathlib
- 
+python:
+  - "2.6"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7"
+# command to install dependencies
+install:
+  - pip install -r docs/requirements.txt
+# command to run tests
+script:
+  - pytest

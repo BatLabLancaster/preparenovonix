@@ -2,8 +2,8 @@ import preparenovonix.novonix_add as prep
 import numpy as np
 import pytest
 
-exfile = '../example_data/example_data.csv'
-exfile_prep = '../example_data/example_data_prep.csv'
+exfile = 'example_data/example_data.csv'
+exfile_prep = 'example_data/example_data_prep.csv'
 
 def test_select_com_val():
     one = 'step == com_val1[index]'
