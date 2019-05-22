@@ -1,5 +1,19 @@
-from distutils.core import setup
-setup(name='preparenovonix',
-      version='0.0.1',
-      py_modules=['preparenovonix'],
-      )
+import setuptools
+
+with open("README.rst","r") as fh:
+    long_description = fh.read()
+    
+setuptools.setup(
+    name='preparenovonix',
+    version='0.0.1',
+    py_modules=['preparenovonix'],
+    description="Clean and add extra information to data produced by the battery cyclers from Novonix.",
+    long_description=long_description,
+    url="https://github.com/BatLabLancaster/preparenovonix",
+    packages=setuptools.find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+)
