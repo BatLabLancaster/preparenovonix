@@ -43,13 +43,13 @@ This code has been developed in Python 3.7.1 and is compatible with Python above
 
 This code uses numpy and pathlib as specified in docs/requirements.txt.
 
-The code can be run directly from a cloned repository or can also be installed as a python package through pip:
+The code can be run directly from a cloned repository or can also be installed as a python `package`_ through pip:
 
 .. code::
 
    pip install preparenovonix
 
-Then the functions can be used after importing novonix_add, for example as follows:
+The functions in the package can be used after importing novonix_add, for example as follows:
 
 .. code-block:: python
 
@@ -100,6 +100,7 @@ List of the `Novonix`_ software versions the code has been tested against:
 
 .. _Novonix: http://www.novonix.ca/
 .. _pyversion: https://uk.mathworks.com/help/matlab/getting-started-with-python.html
+.. _package: https://pypi.org/project/preparenovonix/
 
 .. |build| image:: https://travis-ci.org/BatLabLancaster/preparenovonix.svg?branch=master
     :target: https://travis-ci.org/BatLabLancaster/preparenovonix
