@@ -592,6 +592,9 @@ def reduced_protocol(infile,verbose=False):
     protocol : list
         List with the reduced protocol
 
+    viable_prot : bool
+        False if there was a problem creating the reduced protocol.
+
     Examples
     ---------
     >>>> import pycode.novonix_add as prep
@@ -807,11 +810,11 @@ def reduced_protocol(infile,verbose=False):
 
 def novonix_add_loopnr(infile,verbose=False):
     """
-    Given a cleaned Novonix data file, it adds a 'LoopNr' column, 
+    Given a cleaned Novonix data file, it adds a 'Loop number' column, 
     with monotonically increasing numbers and 
     the protocol line corresponding to a given measurement. 
 
-    Measurements that are not being repeated are assinged: LoopNr=0.
+    Measurements that are not being repeated are assinged: Loop number=0.
 
     This values are determined by the change in the 'State' and 
     the protocol description in the header
