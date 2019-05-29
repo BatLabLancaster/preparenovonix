@@ -87,7 +87,7 @@ List of the `Novonix`_ software versions the code has been tested against:
     :target: https://travis-ci.org/BatLabLancaster/preparenovonix
 
 .. |docs| image:: https://readthedocs.org/projects/prepare-novonix-data/badge/?version=latest
-   :target: https://prepare-novonix-data.readthedocs.io/en/latest/?badge=latest
+   :target: https://prepare-novonix-data.readthedocs.io/en/latest/
    :alt: Documentation Status
 
 .. |zenodo| image:: https://zenodo.org/badge/186994865.svg
