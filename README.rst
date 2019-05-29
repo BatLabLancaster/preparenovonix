@@ -1,12 +1,14 @@
 |build| |docs| |zenodo| 
 
-Prepare Novonix Data
-====================
+.. inclusion-marker-do-not-remove
+
+Preparing Novonix Data
+======================
 
 **preparenovonix** is a Python package that handles common issues encountered in files generated with a range of software versions from the `Novonix`_
 battery-testers. The code can also add extra information that makes
 easier coulombic counting and relating a measurement to the experimental
-protocol. The code provides a master function, *prepare_novonix*, that can run at once all the available `features`_, providing also flexibility to choose only some. 
+protocol. The code provides a master function, *prepare_novonix*, that can run at once all the available features, providing also flexibility to choose only some. 
 
 Example
 -------
@@ -74,9 +76,13 @@ List of the `Novonix`_ software versions the code has been tested against:
 -  1.9.4.0
 
 .. _Novonix: http://www.novonix.ca/
+
 .. _pyversion: https://uk.mathworks.com/help/matlab/getting-started-with-python.html
+
 .. _package: https://pypi.org/project/preparenovonix/
+
 .. _repository: https://github.com/BatLabLancaster/preparenovonix
+
 .. |build| image:: https://travis-ci.org/BatLabLancaster/preparenovonix.svg?branch=master
     :target: https://travis-ci.org/BatLabLancaster/preparenovonix
 

@@ -1,6 +1,6 @@
 .. _features:
-Features
---------
+Code Features
+=============
 
 The `preparenovonix`_ package prepares exported files produced by
 `Novonix`_ battery-testers by (i) cleaning them and (ii) add derived
@@ -25,7 +25,7 @@ expected input parameters in brackets (go to the `module index`_ for full detail
    file’, add the ’State’ column described below.
 
 -  ``prepare_novonix(infile,addstate=False,lprotocol=False,overwrite=False,verbose=False)``:
-   Given a file, follow the flow chart presented in :ref:`chart` (see below for further details).
+   Given a file, follow the :ref:`chart` (see below for further details).
 
 -  ``read_column(infile,column_name,outtype=’float’)``: Given a column
    name, read it from a cleaned ’Novonix file’.
@@ -133,10 +133,18 @@ form few seconds to up to few minutes depending on the size of the input
 file.
 
 .. _preparenovonix: https://github.com/BatLabLancaster/preparenovonix
+
 .. _Novonix: http://www.novonix.ca/
+
 .. _module index: https://prepare-novonix-data.readthedocs.io/en/latest/py-modindex.html
 
 .. _chart:
-.. image:: preparenovonix.png
-  :alt: Flow chart.
-  Flow chart for the ``prepare_novonix`` function. Besides the name of the input file, this function has four optional boolean input parameters: ``addstate``, ``lprotocol``, ``overwrite`` and ``verbose``. The last two parameters are not included in the flow chart, but they are described in the text. In this chart rectangle shapes indicate a process, rounder rectangles the end of a process and diamonds a decision. Note that for simplicity not all the decisions made in the code are shown here.
+
+Flow chart
+----------
+
+.. figure:: preparenovonix.png
+   :align: center
+   :alt: Flow chart
+
+   Flow chart for the ``prepare_novonix`` function. Besides the name of the input file, this function has four optional boolean input parameters: ``addstate``, ``lprotocol``, ``overwrite`` and ``verbose``. The last two parameters are not included in the flow chart, but they are described in the text. In this chart rectangle shapes indicate a process, rounder rectangles the end of a process and diamonds a decision. Note that for simplicity not all the decisions made in the code are shown here.
