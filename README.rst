@@ -3,33 +3,11 @@
 Prepare Novonix Data
 ====================
 
-This code handles common issues encountered in files generated with a
-range of `Novonix`_ software versions and it can add extra information.
-There is a master function *prepare_novonix* that can run at once
-all the available features, providing also flexibility to only choose
-some.
+**preparenovonix** is a Python package that handles common issues encountered in files generated with a range of software versions from the `Novonix`_
+battery-testers. The code can also add extra information that makes
+easier coulombic counting and relating a measurement to the experimental
+protocol. The code provides a master function, *prepare_novonix*, that can run at once all the available `features`_, providing also flexibility to choose only some. 
 
-The code can be used to test if a file has the expected structure for a
-`Novonix`_ file (*isnovoix* function) and to read a specific column
-from a raw `Novonix`_ file (*read_column* function). Files can be
-cleanned from empty lines and characters added after the ']' in the
-header and failed tests are handled by modifying the capacity column to
-start at the sum of the capacities from the failed tests, instead of 0
-(*cleannovonix* function).
-
-The extra information that can be created for **cleaned** files
-(functions: *novonix_add_state* and *novonix_add_loopnr*) is:
-
--  A 'State' column with 0 for the first measurement of a particular
-   step, 1 for regular data points, 2 to indicate the last measurement
-   in that series and -1 for single measurements.
--  A reduced protocol with one command per numerated line.
--  A 'Protocol line' column that makes reference to the reduced protocol
-   lines.
--  A 'Loop number' column with 0s when commands are not repeated and
-   monotoncally increasing integers starting from 1, to indicate the
-   repetition number.
-   
 Example
 -------
 
@@ -39,11 +17,11 @@ example, simply type: :code:`python example.py`.
 Requirements and Installation
 -----------------------------
 
-This code has been developed in Python 3.7.1 and is compatible with Python above 3.4 versions. The code has been tested to run in both Windows and Linux OS. It has been tested to run within Matlab R2018a.
+This code has been developed in Python 3.7.1 and it is compatible with Python above 3.4 versions. The code has been tested to run in Windows, OSX and Linux operating systems. 
 
 This code uses numpy and pathlib as specified in docs/requirements.txt.
 
-The code can be run directly from a cloned repository or can also be installed as a python `package`_ through pip:
+The code can be run directly from a cloned GitHub `repository`_ or it can also be installed as a python `package`_ through pip:
 
 .. code::
 
@@ -55,32 +33,29 @@ The functions in the package can be used after importing novonix_add, for exampl
 
    import preparenovonix.novonix_add as prep
 
-Running this code from MatLab
------------------------------
+The code has been tested within Matlab R2018a.
 
-In your code add the 'pycode' folder to your search path:
+Running `preparenovonix` code from MatLab
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: Matlab
-		
-   addpath(genpath('pycode'))
+To run the code from Matlab, Python will need to be installed including the packages: numpy, pathlib and preparenovonix (see details above). Ensure that Matlab can see your installation of Python by running `pyversion`_. If this is not the case then: (i) find where your Python executable is (within a python terminal you can do this by typing: `import os, sys ; os.path.dirname(sys.executable)`), (ii) type  within your MatLab interpreter `pyversion [path to python executable]` and (iii) check that now the path to Python is recognised with `pyversion`_. Make sure that 
 
-Try to run the code catching exceptions:
+In your code you can add the following lines that will call the master function from the package, catching exceptions: 
 
 .. code-block:: Matlab
-		
+
    try
-	  py.pycode.novonix_add.prepare_novonix(file_to_open,pyargs('verbose','False','lprotocol','True'));
-   catch e e.message if(isa(e,'matlab.exception.PyException'))
-	  e.ExceptionObject
+	py.preparenovonix.novonix_add.prepare_novonix(file_to_open,...
+		pyargs('addstate','True',...
+		'lprotocol','True',...
+                'overwrite','True',...
+                'verbose','False'));
+   catch e
+	e.message
+        if(isa(e,'matlab.exception.PyException'))
+		e.ExceptionObject
+        end
    end
-
-Ensure that Matlab can see your installation of Python by running
-`pyversion`_. If Matlab cannot see python, once you know where your
-Python executable is (within a python terminal you can do this by
-typing: :code:`import os, sys ; os.path.dirname(sys.executable)`), type
-within your MatLab interpreter :code:`pyversion [path to python executable]`
-and check that now the path to Python was recognised with
-`pyversion`_.
 
 Compatibility
 -------------
@@ -101,7 +76,7 @@ List of the `Novonix`_ software versions the code has been tested against:
 .. _Novonix: http://www.novonix.ca/
 .. _pyversion: https://uk.mathworks.com/help/matlab/getting-started-with-python.html
 .. _package: https://pypi.org/project/preparenovonix/
-
+.. _repository: https://github.com/BatLabLancaster/preparenovonix
 .. |build| image:: https://travis-ci.org/BatLabLancaster/preparenovonix.svg?branch=master
     :target: https://travis-ci.org/BatLabLancaster/preparenovonix
 

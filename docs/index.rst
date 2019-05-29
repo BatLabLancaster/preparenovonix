@@ -16,4 +16,5 @@ Documentation for preparing Novonix data
    :caption: Contents:
 
 .. include:: ../README.rst
-
+	     features.rst
+	     modules.rst
