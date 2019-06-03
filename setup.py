@@ -1,13 +1,16 @@
 import setuptools
 
-with open("README.rst","r") as fh:
+with open("README.rst", "r") as fh:
     long_description = fh.read()
-    
+
+desc = "Clean and add extra information to data " + \
+    "produced by the battery cyclers from Novonix."
+
 setuptools.setup(
     name='preparenovonix',
-    version='0.0.2',
+    version='0.0.3',
     py_modules=['preparenovonix'],
-    description="Clean and add extra information to data produced by the battery cyclers from Novonix.",
+    description=desc,
     long_description=long_description,
     url="https://github.com/BatLabLancaster/preparenovonix",
     packages=setuptools.find_packages(),
