@@ -236,7 +236,8 @@ def icolumn(infile, column_name):
         # Find the position of the given column name
         ii = 0
         for col in colnames:
-            if column_name == col.strip():
+            cs = col.strip()
+            if column_name.casefold() == cs.casefold():
                 icol = ii
                 return icol
             ii += 1

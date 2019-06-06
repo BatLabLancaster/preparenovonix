@@ -5,7 +5,9 @@ from preparenovonix.compare import plot_vct
 # otherwise ' ' can be enough to include the path.
 infile = r"example_data/example_data.csv"
 
+# Prepare the Novonix data file
 prep.prepare_novonix(infile, addstate=True, lprotocol=True,
                      overwrite=False, verbose=True)
 
+# Compare the prepared file with the original one
 plot_vct(infile, first_loop=0, plot_type='pdf', plot_show=True)

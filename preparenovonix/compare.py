@@ -84,6 +84,8 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
                     # Count failed tests for each start of file
                     idata += 1
                     if idata == ntests:
+                        # Read the header
+                        ff.readline()
                         break
         for line in ff:
             tt.append(line.split(",")[icol_t])
@@ -115,7 +117,8 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
     axl.set_xlabel(nv.col_t, fontsize=fs)
     axl.set_ylabel(nv.loop_col, fontsize=fs)
 
-    axl.plot(a_t[astart::], a_l[astart::], cols[2], label="Loop number after")
+    # axl.plot(a_t[astart::], a_l[astart::], cols[2], label="Loop number after")
+    axl.plot(a_t[astart::], a_l[astart::], "ko", label="Loop number after")
 
     # Steps
     axs = plt.subplot(gs[2, :], sharex=axl)
