@@ -48,3 +48,16 @@ def test_replace_file():
     prep.replace_file(longf, shortf, newbigger=True)
     assert os.path.isfile(longf) is False
     os.remove(shortf)
+
+
+def test_get_format():
+    fmt_space, commands = prep.get_format("[0: Open_circuit_storage:]")
+    assert fmt_space is False
+    fmt_space, commands = prep.get_format("[Open circuit storage]")
+    assert fmt_space is True
+
+
+def test_get_command():
+    strval = "Open circuit storage"
+    assert prep.get_command("[" + strval + "]", fmt_space=True) == strval
+    assert prep.get_command("[0 :" + strval + ":]", fmt_space=False) == strval

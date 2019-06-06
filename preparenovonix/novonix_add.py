@@ -4,6 +4,8 @@ import preparenovonix.novonix_variables as nv
 from preparenovonix.novonix_io import replace_file
 from preparenovonix.novonix_io import icolumn
 from preparenovonix.novonix_io import read_column
+from preparenovonix.novonix_io import get_command
+from preparenovonix.novonix_io import get_format
 
 
 def column_check(infile, col_name, verbose=False):
@@ -375,7 +377,7 @@ def protocol_check(infile, istate, verbose=False):
             & (step_number != nv.CCCV_CVc)
             & (step_number != nv.CCCV_CVd)
         )
-    )
+    )[1]
     if verbose:
         print(
             "Unique steps = {} (step=-1: {}), Steps from protocol = {}".format(
@@ -410,6 +412,17 @@ def protocol_check(infile, istate, verbose=False):
             )
 
     return viable_prot
+
+
+def create_end_repeat(new_line, iline, nstep, protocol, inrepeat):
+    new_line = "[" + str(iline) + " : End Repeat " + str(nstep) + " steps :"
+    protocol.append(new_line + "] \n")
+    new_line = " "
+
+    iline += 1
+    inrepeat = False
+
+    return new_line, iline, nstep, protocol, inrepeat
 
 
 def create_reduced_protocol(infile, verbose=False):
@@ -462,6 +475,7 @@ def create_reduced_protocol(infile, verbose=False):
     with open(infile, "r") as ff:
         # Read until the protocol starts
         for line in ff:
+            ih += 1
             if "[Protocol]" in line:
                 break
 
@@ -477,15 +491,7 @@ def create_reduced_protocol(infile, verbose=False):
                     continue_reading = False
 
         # Establish which format is this file
-        if ":" in line:
-            fmt_space = False
-            commands = nv.com_prot
-        else:
-            fmt_space = True
-            commands = []
-            for com in nv.com_prot:
-                newcom = com.replace("_", " ")
-                commands.append(newcom)
+        fmt_space, commands = get_format(line)
 
         # Set counters to 0 for the number of lines, steps,
         # 'State' blocks (0,1,...,1,2), commands and subcommands
@@ -497,42 +503,25 @@ def create_reduced_protocol(infile, verbose=False):
         istate = 0
         command = " "
         isub = 0
+        doneendrepeat = False
 
         # Read until the end of the protocol
         while "[End Protocol]" not in line:
-            fw = line.strip()
-            # Find commands ignoring left spaces
-            if fmt_space:
-                command = fw[1:-1]
-            else:
-                if ":" in fw:
-                    command = fw.split(":")[1].strip()
-                else:
-                    command = fw[1:-1]
+            command = get_command(line, fmt_space)
 
             if command in commands or command.split()[0] == "Repeat":
                 iline += 1
 
-                # Add previous line
-                if iline > 1:
+                if iline > 1 and not doneendrepeat:
                     # Append the new line
                     protocol.append(new_line + "] \n")
                     new_line = " "
 
                     # Create an 'End Repeat line if needed
                     if istep == nstep and inrepeat:
-                        new_line = (
-                            "["
-                            + str(iline)
-                            + " : End Repeat "
-                            + str(nstep)
-                            + " steps :"
+                        new_line, iline, nstep, protocol, inrepeat = create_end_repeat(
+                            new_line, iline, nstep, protocol, inrepeat
                         )
-                        protocol.append(new_line + "] \n")
-                        new_line = " "
-
-                        iline += 1
-                        inrepeat = False
 
                 # Get the number of repetitions and repeated steps
                 if command.split()[0] == "Repeat":
@@ -547,8 +536,10 @@ def create_reduced_protocol(infile, verbose=False):
                             + str(infile)
                             + " \n"
                         )
+                    # donendrepeat = False
 
                     unexpected = False
+                    # Get the number of repetitions and steps within the loop
                     if fmt_space:
                         line = ff.readline()
                         ih += 1
@@ -610,13 +601,20 @@ def create_reduced_protocol(infile, verbose=False):
                 # Append subcommands without brackets,
                 # separated by semicoloms
                 isub += 1
+                subcommand = command
 
-                subcommand = fw[1:-1]
                 if subcommand not in nv.ignore:
                     if isub == 1:
                         new_line = new_line + subcommand
                     else:
                         new_line = new_line + ";" + subcommand
+
+                if subcommand.strip().casefold() == nv.endrepeat.casefold():
+                    # Create an 'End Repeat line
+                    new_line, iline, nstep, protocol, inrepeat = create_end_repeat(
+                        new_line, iline, nstep, protocol, inrepeat
+                    )
+                    doneendrepeat = True
 
             # Continue reading
             line = ff.readline()
@@ -637,7 +635,7 @@ def create_reduced_protocol(infile, verbose=False):
                 new_line = " "
 
         protocol.append(nv.end_rprotocol)
-
+        sys.exit()
         # Test the obtained protocol
         viable_prot = protocol_check(infile, istate, verbose=verbose)
 

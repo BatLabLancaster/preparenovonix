@@ -14,12 +14,13 @@ line_col = "Protocol Line (it refers to the reduced protocol)"
 # Commands in Protocols
 increment1 = "Increment the cycle counter"
 increment2 = "Increment cycle counter"
+endrepeat = "End repeat"
 
 ignore = [
     "End storage",
     "End charge",
     "End discharge",
-    "End repeat",
+    endrepeat,
     increment1,
     increment2,
     "End increment",

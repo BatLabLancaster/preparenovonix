@@ -181,6 +181,8 @@ def cleannovonix(infile):
 
     # Find the capacity colum
     icapacity = icolumn(infile, nv.col_c)
+    # Find the run time column
+    iruntime = icolumn(infile, nv.col_t)
 
     # Deal with the capacity of the failed tests
     last_capacity = capacity_failed_tests(icapacity, ntests, infile)
@@ -227,7 +229,7 @@ def cleannovonix(infile):
             for item in header:
                 tf.write(str(item))
 
-        # Append the data
+        # Append the data jumping any line with time going backwards
         with open(tmp_file, "a") as tf:
             # Write the first data row
             if ntests > 1:
@@ -243,10 +245,15 @@ def cleannovonix(infile):
                 tf.write(line_data1)
 
             # Write the rest of the data
+            last_t = -1.0
             for line in ff:
+                columns = line.split(",")
+                if float(columns[iruntime]) < last_t:
+                    continue
+                last_t = float(columns[iruntime])
+
                 if ntests > 1:
                     # Modify the Capacity column in case of failed tests
-                    columns = line.split(",")
                     new_capacity = float(columns[icapacity]) + float(last_capacity)
                     columns[icapacity] = str(new_capacity)
 

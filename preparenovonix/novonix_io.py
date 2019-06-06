@@ -360,3 +360,83 @@ def replace_file(newfile, infile, newbigger=False):
     # Replace the input file with the new one
     move(newfile, infile)
     return
+
+
+def get_format(line):
+    """
+    Given a file line, establish the format
+
+    Parameters
+    -----------
+    line : string
+        Line of the header
+
+    Returns
+    --------
+    fmt_space : boolean
+        True indicates the  main protocol commands 
+        have words separated by spaces, which it is
+        assumed to be connected with the presence of a 
+        semi-colons in the header lines.
+
+    commands : array of string
+        Main protocol commands in the adequate format
+
+    Examples
+    ---------
+    >>>> import preparenovonix.novonix_io as prep
+
+    >>>> fmt_space, commands = prep.get_format('[0: Open_circuit_storage:]')
+    False
+    """
+
+    if ":" in line:
+        fmt_space = False
+        commands = nv.com_prot
+    else:
+        fmt_space = True
+        commands = []
+        for com in nv.com_prot:
+            newcom = com.replace("_", " ")
+            commands.append(newcom)
+
+    return fmt_space, commands
+
+
+def get_command(line, fmt_space):
+    """
+    Given a header line, get the possible command
+
+    Parameters
+    -----------
+    line : string
+        Line of the header
+
+    fmt_space : boolean
+        Yes = Novonix format with spaces in the commands
+
+    Returns
+    --------
+    command : string
+        Instruction in the header line
+
+    Examples
+    ---------
+    >>>> import preparenovonix.novonix_io as prep
+
+    >>>> command = prep.get_command('[Open circuit storage]',fmt_space=True)
+    Open circuit storage
+    """
+
+    command = " "
+
+    fw = line.strip()
+    # Find commands ignoring left spaces
+    if fmt_space:
+        command = fw[1:-1]
+    else:
+        if ":" in fw:
+            command = fw.split(":")[1].strip()
+        else:
+            command = fw[1:-1]
+    return command

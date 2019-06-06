@@ -107,6 +107,10 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
 
     # Plot only when the loop starts to be biggeer than val
     ind = np.where(a_l > val)
+    if np.shape(ind)[1] < 1:
+        print("WARNING compare.plot_vct: not enough data to be plotted")
+        return
+
     astart = ind[0][0]
     first_a_t = a_t[astart]
     ind = np.where(b_t >= first_a_t)
@@ -117,25 +121,24 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
     axl.set_xlabel(nv.col_t, fontsize=fs)
     axl.set_ylabel(nv.loop_col, fontsize=fs)
 
-    # axl.plot(a_t[astart::], a_l[astart::], cols[2], label="Loop number after")
-    axl.plot(a_t[astart::], a_l[astart::], "ko", label="Loop number after")
+    axl.plot(a_t[astart::], a_l[astart::], cols[2], label="Loop number after")
 
     # Steps
     axs = plt.subplot(gs[2, :], sharex=axl)
     plt.setp(axs.get_xticklabels(), visible=False)
     axs.set_ylabel(nv.col_step, fontsize=fs)
 
-    axs.plot(b_t[bstart::], b_s[bstart::], cols[0], label="Before")
-    axs.plot(a_t[astart::], a_s[astart::], cols[2], linestyle="--", label="After")
+    axs.plot(a_t[astart::], a_s[astart::], cols[2], label="After")
+    axs.plot(b_t[bstart::], b_s[bstart::], cols[0], linestyle="--", label="Before")
 
     # Voltage and capacity vs. time
     axv = plt.subplot(gs[:-2, :], sharex=axl)
     plt.setp(axv.get_xticklabels(), visible=False)
     axv.set_ylabel(nv.col_v, fontsize=fs)
 
-    axv.plot(b_t[bstart::], b_v[bstart::], cols[0], label="Potential before")
+    axv.plot(a_t[astart::], a_v[astart::], cols[2], label="Potential after")
     axv.plot(
-        a_t[astart::], a_v[astart::], cols[2], linestyle="--", label="Potential after"
+        b_t[bstart::], b_v[bstart::], cols[0], linestyle="--", label="Potential before"
     )
 
     leg = axv.legend(loc=2, fontsize=fs - 2)
