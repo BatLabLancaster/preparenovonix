@@ -40,6 +40,9 @@ com_prot = [
     "Repeat",
 ]
 
+protocol_first = "[Reduced Protocol] \n"
+end_rprotocol = "[End Reduced Protocol] \n"
+
 # Novonix step values
 OCV = 0
 CCc = 1

@@ -1,49 +1,77 @@
-import os.path
-from pathlib import Path
+import sys, os.path
 import numpy as np
-import novonix_variables as nv
+from shutil import move, copy
+import preparenovonix.novonix_variables as nv
 
 
-def file_name(file_name, overwrite=False):
+def get_infile(file_to_open, overwrite=False):
+    """
+    Given a file name return it after dealing
+    with possible issues with the path  and 
+    copy it if the overwrite flag is set to True.
+
+    Parameters
+    ----------
+    infile_name : string
+        Name of the input file.
+
+    overwrite: boolean
+        Yes : overwrite the input file
+        No  : a new file will be created, appending '_prep' at the end of the
+              original file file
+
+    Returns
+    --------
+    infile : string
+        Path to the (new) file.
+
+    fname : string
+        File name withouth the path.
+
+    Examples
+    ---------
+    >>> from preparenovonix.novonix_io import get_infile
+
+    >>>> get_infile('example_data/example_data.csv',overwrite=False)
+    """
+
     # Extract the path and file name
-    dirname, fname = os.path.split(os.path.abspath(file_name))
+    dirname, fname = os.path.split(os.path.abspath(file_to_open))
 
-    # Modify the slashes in the input path if needed
-    file_to_open = Path(dirname) / fname
-
-    if not overwrite:
+    if overwrite:
+        infile = os.path.join(dirname, fname)
+    else:
         root = fname.split(".")[0]
         ending = fname.split(".")[1]
         fname = root + "_prep." + ending
+        infile = os.path.join(dirname, fname)
         # If *prep* file already exists, it will be replaced.
-        copy(infile, os.path.join(dirname, fname))
-        return infile
+        copy(file_to_open, infile)
 
-    copy(infile, os.path.join(dirname, fname))
-    return infile
+    return infile, fname
 
 
 def isnovonix(infile):
     """
     Given a data file, check if it exists and
-    if looks like a Novonix file, allowing for blank lines
+    if looks like a Novonix data file, allowing for blank lines
     and commas after the commands due to having open the file in Excel
 
     Parameters
     ----------
     infile : string
-        Name of the input Novonix file
+        Name of the input Novonix data file
 
     Returns
     --------
     answer : boolean
-        Yes=the file seems to be a Novonix file
+        Yes=the file seems to be a Novonix data file
 
     Examples
     ---------
-    >>>> import pycode.novonix_add as prep
+    >>>> from preparenovonix.novonix_io import isnovonix
 
-    >>>> prep.isnovonix('example_data/example_data.csv')
+    >>>> isnovonix('example_data/example_data.csv')
     True
     """
 
@@ -53,7 +81,7 @@ def isnovonix(infile):
     if not os.path.isfile(infile):
         answer = False
         print(
-            "STOP function isnovonix \n"
+            "STOP novonix_io.isnovonix \n"
             + "REASON Input file not found: "
             + str(infile)
             + " \n"
@@ -70,7 +98,7 @@ def isnovonix(infile):
                         if char1 in nv.numberstr:
                             answer = False
                             print(
-                                "STOP function isnovonix \n"
+                                "STOP novonix_io.isnovonix \n"
                                 + "REASON Reached the end of the input file \n"
                                 + "       "
                                 + str(infile)
@@ -103,7 +131,7 @@ def isnovonix(infile):
             if nv.col_step not in colnames:
                 answer = False
                 print(
-                    "STOP function isnovonix \n"
+                    "STOP novonix_io.isnovonix \n"
                     + 'REASON No "Step Number" colum found in input file \n'
                     + "       "
                     + str(infile)
@@ -116,7 +144,7 @@ def isnovonix(infile):
 
                 answer = False
                 print(
-                    "STOP function isnovonix \n"
+                    "STOP novonix_io.isnovonix \n"
                     + 'REASON No "Step Time" colum found in input file \n'
                     + "       "
                     + str(infile)
@@ -135,7 +163,7 @@ def icolumn(infile, column_name):
     Parameters
     -----------
     infile : string
-        Name of the input Novonix file
+        Name of the input Novonix data file
 
     column_name : string
         Name of the column name to find
@@ -152,15 +180,15 @@ def icolumn(infile, column_name):
 
     Examples
     ---------
-    >>>> import pycode.novonix_add as prep
+    >>>> from preparenovonix.novonix_io import icolumn
 
-    >>>> prep.icolumn('example_data/example_data.csv','Step Number')
+    >>>> icolumn('example_data/example_data.csv','Step Number')
     2
     """
 
     icol = -1
 
-    # Check if the file has the expected structure for a Novonix file
+    # Check if the file has the expected structure for a Novonix data file
     answer = isnovonix(infile)
     if not answer:
         sys.exit("STOP Input not from Novonix, {}".format(infile))
@@ -194,7 +222,7 @@ def read_column(infile, column_name, outtype="float"):
     Parameters
     -----------
     infile : string
-        Name of the input Novonix file
+        Name of the input Novonix data file
 
     column_name : string
         Name of the column to be read
@@ -209,16 +237,16 @@ def read_column(infile, column_name, outtype="float"):
 
     Examples
     ---------
-    >>>> import pycode.novonix_add as prep
+    >>>> from preparenovonix.novonix_io import read_column
 
-    >>>> col = prep.read_column('example_data/example_data_prep.csv',
+    >>>> col = read_column('example_data/example_data_prep.csv',
     'Step Number',outtype='int')
 
     >>>> print(col[0])
     0
     """
 
-    # Check if the file has the expected structure for a Novonix file
+    # Check if the file has the expected structure for a Novonix data file
     answer = isnovonix(infile)
     if not answer:
         sys.exit("STOP Input not from Novonix, {}".format(infile))
@@ -253,4 +281,47 @@ def read_column(infile, column_name, outtype="float"):
         column_data = np.array(column_data)
 
         column = column_data.astype(getattr(np, outtype))
+
     return column
+
+
+def replace_file(newfile, infile, newbigger=False):
+    """
+    Replace infile by newfile, testing, if adequate,
+    if the new file is larger than the older.
+
+    Parameters
+    ----------
+    newfile : string
+        Name of the new file
+
+    infile : string
+        Name of the file to be replaced.
+
+    newbigger: boolean
+        Yes : test if the newfile is larger than infile.
+        No  : simply move the files
+
+    Examples
+    ---------
+    >>> from preparenovonix.novonix_io import replace_file
+
+    >>>> replace_file("example_data/example_data_prep.csv","example_data/example_data.csv")
+    """
+
+    if newbigger:
+        # Check that the size of the newfile is
+        # bigger than the original infile
+        size_original = os.stat(infile).st_size
+        size_tmp = os.stat(newfile).st_size
+        if size_original > size_tmp:
+            sys.exit(
+                "STOP novonix_io.replace_file \n"
+                + "REASON new file is smaller than the original one \n"
+                + "       "
+                + str(infile)
+            )
+
+    # Replace the input file with the new one
+    move(newfile, infile)
+    return

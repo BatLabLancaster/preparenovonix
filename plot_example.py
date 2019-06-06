@@ -2,8 +2,8 @@ import sys, os.path
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
-from novonix_io import read_column
-from novonix_io import icolumn
+from preparenovonix.novonix_io import read_column
+from preparenovonix.novonix_io import icolumn
 
 col_t = "Run Time (h)"
 col_v = "Potential (V)"
