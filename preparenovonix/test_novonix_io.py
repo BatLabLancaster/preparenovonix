@@ -6,6 +6,12 @@ exfile = "example_data/example_data.csv"
 exfile_prep = "example_data/example_data_prep.csv"
 
 
+def test_after_file_name():
+    after_file = prep.after_file_name("example_data/example_data.csv")
+    dirname, fname = os.path.split(os.path.abspath(exfile_prep))
+    assert after_file == os.path.join(dirname, fname)
+
+
 def test_get_infile():
     exprep = "example_data/example_data_prep_prep.csv"
     prep.get_infile(exfile_prep, overwrite=False)

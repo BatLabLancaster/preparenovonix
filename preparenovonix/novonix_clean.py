@@ -157,8 +157,8 @@ def capacity_failed_tests(icapacity, ntests, infile):
 
 def cleannovonix(infile):
     """
-    Given a Novonix file remove blank lines, correct the header
-    and remove failed tests if needed.
+    Given a Novonix file remove blank lines, correct the header,
+    remove failed tests if needed.
 
     Parameters
     -----------
@@ -180,7 +180,7 @@ def cleannovonix(infile):
     ntests = count_tests(infile)
 
     # Find the capacity colum
-    icapacity = icolumn(infile, nv.col_capacity)
+    icapacity = icolumn(infile, nv.col_c)
 
     # Deal with the capacity of the failed tests
     last_capacity = capacity_failed_tests(icapacity, ntests, infile)

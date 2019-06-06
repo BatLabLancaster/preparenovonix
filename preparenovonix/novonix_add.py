@@ -37,7 +37,7 @@ def column_check(infile, col_name, verbose=False):
     True
     """
 
-    icol = icolumn(infile, nv.state_col)
+    icol = icolumn(infile, col_name)
     if icol > -1:
         if verbose:
             print("The file already has the column {}".format(col_name))

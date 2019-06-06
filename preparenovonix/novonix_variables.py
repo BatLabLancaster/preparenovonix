@@ -3,7 +3,9 @@ eps = 1.0e-5
 # Novonix columns
 col_step = "Step Number"
 col_tstep = "Step Time (h)"
-col_capacity = "Capacity (Ah)"
+col_t = "Run Time (h)"
+col_v = "Potential (V)"
+col_c = "Capacity (Ah)"
 
 state_col = "State (0=Start 1=Regular 2=End -1=Single Measurement)"
 loop_col = "Loop number"

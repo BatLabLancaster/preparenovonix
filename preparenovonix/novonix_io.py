@@ -4,6 +4,39 @@ from shutil import move, copy
 import preparenovonix.novonix_variables as nv
 
 
+def after_file_name(file_to_open):
+    """
+    Given a file name return as:
+    [file_to_open root]_prep.[file-to_open_ending]
+
+    Parameters
+    ----------
+    file_to_open : string
+        Name of the input file.
+
+    Returns
+    --------
+    after_file : string
+        Full path to the (new) file.
+
+    Examples
+    ---------
+    >>> from preparenovonix.novonix_io import after_file_name
+
+    >>>> after_file_name('example_data/example_data.csv')
+    """
+
+    # Extract the path and file name
+    dirname, fname = os.path.split(os.path.abspath(file_to_open))
+
+    root = fname.split(".")[0]
+    ending = fname.split(".")[1]
+    fname = root + "_prep." + ending
+    after_file = os.path.join(dirname, fname)
+
+    return after_file
+
+
 def get_infile(file_to_open, overwrite=False):
     """
     Given a file name return it after dealing
@@ -41,10 +74,7 @@ def get_infile(file_to_open, overwrite=False):
     if overwrite:
         infile = os.path.join(dirname, fname)
     else:
-        root = fname.split(".")[0]
-        ending = fname.split(".")[1]
-        fname = root + "_prep." + ending
-        infile = os.path.join(dirname, fname)
+        infile = after_file_name(file_to_open)
         # If *prep* file already exists, it will be replaced.
         copy(file_to_open, infile)
 
@@ -262,19 +292,23 @@ def read_column(infile, column_name, outtype="float"):
 
         # Read the column names
         line = ff.readline()
-        colnames = line.split(",")
 
         # Find the position of the given column name
-        ii = -1
-        for col in colnames:
-            ii += 1
-            if column_name == col.strip():
-                icolumn = ii
-                break
+        icol = icolumn(infile, column_name)
+        if icol < 0:
+            sys.exit(
+                "STOP novonix_io.readcolumn \n"
+                + "REASON "
+                + column_name
+                + " columnn \n"
+                + "      not found in "
+                + str(infile)
+                + " \n"
+            )
 
         # Read the column of interest
         for line in ff:
-            val = line.split(",")[icolumn].rstrip()
+            val = line.split(",")[icol].rstrip()
             column_data.append(val)
 
         # Transform the list into a numpy array
