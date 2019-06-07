@@ -4,7 +4,6 @@ language: python
 dist: xenial   # required for Python >= 3.7
 sudo: yes
 python:
-  - "3.4"
   - "3.5"
   - "3.6"
   - "3.7"	
