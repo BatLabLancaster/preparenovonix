@@ -1,4 +1,4 @@
-|build| |docs| |zenodo| 
+|build| |coverage| |docs| |pypi| |zenodo| 
 
 .. inclusion-marker-do-not-remove
 
@@ -19,7 +19,7 @@ example, simply type: :code:`python example.py`.
 Requirements and Installation
 -----------------------------
 
-This code has been developed in Python 3.7.1 and it is compatible with Python above 3.4 versions. The code has been tested to run in Windows, OSX and Linux operating systems. 
+This code has been developed in Python 3.7.1 and it is compatible with Python above 3.5 versions. The code has been tested to run in Windows, OSX and Linux operating systems. 
 
 This code uses numpy and pathlib as specified in docs/requirements.txt.
 
@@ -86,9 +86,15 @@ List of the `Novonix`_ software versions the code has been tested against:
 .. |build| image:: https://travis-ci.org/BatLabLancaster/preparenovonix.svg?branch=master
     :target: https://travis-ci.org/BatLabLancaster/preparenovonix
 
+.. |coverage| image:: https://coveralls.io/repos/github/BatLabLancaster/preparenovonix/badge.svg?branch=master
+    :target: https://coveralls.io/github/BatLabLancaster/preparenovonix?branch=master
+	     
 .. |docs| image:: https://readthedocs.org/projects/prepare-novonix-data/badge/?version=latest
    :target: https://prepare-novonix-data.readthedocs.io/en/latest/
    :alt: Documentation Status
 
+.. |pypi| image:: https://badge.fury.io/py/preparenovonix.svg
+    :target: https://pypi.org/project/preparenovonix/
+	 
 .. |zenodo| image:: https://zenodo.org/badge/186994865.svg
    :target: https://zenodo.org/badge/latestdoi/186994865
