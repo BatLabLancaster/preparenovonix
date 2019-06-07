@@ -8,7 +8,7 @@ desc = "Clean and add extra information to data " + \
 
 setuptools.setup(
     name='preparenovonix',
-    version='0.0.3',
+    version='1.0.0',
     py_modules=['preparenovonix'],
     description=desc,
     long_description=long_description,
