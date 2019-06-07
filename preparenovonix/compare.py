@@ -99,7 +99,7 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
     b_s = np.asarray(ss, dtype=int)
 
     # Plot
-    cols = ["darkred", "salmon", "cornflowerblue", "navy"]
+    cols = ["navy", "salmon", "cornflowerblue", "darkred"]
     plt.figure(figsize=(8.0, 11.0))
     gs = gridspec.GridSpec(4, 1)
     gs.update(wspace=0.0, hspace=0.0)
@@ -121,45 +121,51 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
     axl.set_xlabel(nv.col_t, fontsize=fs)
     axl.set_ylabel(nv.loop_col, fontsize=fs)
 
-    axl.plot(a_t[astart::], a_l[astart::], cols[2], label="Loop number after")
+    axl.plot(
+        a_t[astart::], a_l[astart::], cols[0], linewidth=2.5, label="Loop number after"
+    )
 
     # Steps
     axs = plt.subplot(gs[2, :], sharex=axl)
     plt.setp(axs.get_xticklabels(), visible=False)
     axs.set_ylabel(nv.col_step, fontsize=fs)
 
-    axs.plot(a_t[astart::], a_s[astart::], cols[2], label="After")
-    axs.plot(b_t[bstart::], b_s[bstart::], cols[0], linestyle="--", label="Before")
+    axs.plot(a_t[astart::], a_s[astart::], cols[0], linewidth=2.5, label="After")
+    axs.plot(b_t[bstart::], b_s[bstart::], cols[1], linestyle="--", label="Before")
 
     # Voltage and capacity vs. time
     axv = plt.subplot(gs[:-2, :], sharex=axl)
     plt.setp(axv.get_xticklabels(), visible=False)
     axv.set_ylabel(nv.col_v, fontsize=fs)
 
-    axv.plot(a_t[astart::], a_v[astart::], cols[2], label="Potential after")
     axv.plot(
-        b_t[bstart::], b_v[bstart::], cols[0], linestyle="--", label="Potential before"
+        a_t[astart::], a_v[astart::], cols[0], linewidth=2.5, label="Potential after"
+    )
+    axv.plot(
+        b_t[bstart::], b_v[bstart::], cols[1], linestyle="--", label="Potential before"
     )
 
     leg = axv.legend(loc=2, fontsize=fs - 2)
     ii = 0
     for text in leg.get_texts():
         text.set_color(cols[ii])
-        ii = ii + 2
+        ii += 1
         leg.draw_frame(False)
 
     axc = axv.twinx()
     axc.set_ylabel(nv.col_c, fontsize=fs)
-    axc.plot(b_t[bstart::], b_c[bstart::], cols[1], label="Capacity before")
     axc.plot(
-        a_t[astart::], a_c[astart::], cols[3], linestyle="--", label="Capacity after"
+        a_t[astart::], a_c[astart::], cols[2], linewidth=2.5, label="Capacity after"
+    )
+    axc.plot(
+        b_t[bstart::], b_c[bstart::], cols[3], linestyle="--", label="Capacity before"
     )
 
     leg = axc.legend(loc=4, fontsize=fs - 2)
-    ii = 1
+    ii = 2
     for text in leg.get_texts():
         text.set_color(cols[ii])
-        ii = ii + 2
+        ii += 1
     leg.draw_frame(False)
 
     plt.savefig(figname)

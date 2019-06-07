@@ -414,15 +414,100 @@ def protocol_check(infile, istate, verbose=False):
     return viable_prot
 
 
-def create_end_repeat(new_line, iline, nstep, protocol, inrepeat):
-    new_line = "[" + str(iline) + " : End Repeat " + str(nstep) + " steps :"
-    protocol.append(new_line + "] \n")
-    new_line = " "
+def rep_info_not_fmtspace(line, fmt_space):
+    """
+    Given a line from a file with format: fmt_space=False,
+    get the number or repetitions and 
+    the number of steps that are being repeated
 
-    iline += 1
+    Parameters
+    -----------
+    line : string
+        Line with data from a Novonix data file
+
+    fmt_space : boolean
+        This function only works if this variable is False
+
+    Returns
+    -------
+    ncount : int
+        Number of repetitions in a loop
+
+    nstep : int
+        Number or steps in a loop
+
+    unexpected : boolean
+        Flag to state if an unexpected syntax has been encountered
+
+    Examples
+    ---------
+    >>>> import preparenovonix.novonix_add as prep
+    >>>> ncount, nstep, unexpected = prep.rep_info_not_fmtspace('[5: Repeat: 24 time(s) Node count: 4]',False)
+    >>>> print(ncount, nstep, unexpected)
+    24 4 False
+    """
+
+    if fmt_space:
+        sys.exit("STOP novonix_add.rep_info_not_fmtspace: wrong format")
+
+    unexpected = False
+    linestrip = line.strip()
+    if ":" in linestrip:
+        fw = linestrip.split(":")
+        if len(fw) < 4:
+            unexpected = True
+        else:
+            ncount = int(fw[2].strip().split()[0])
+            nstep = int(fw[3][:-1])
+    else:
+        unexpected = True
+
+    return ncount, nstep, unexpected
+
+
+def create_end_repeat(nstep, iline, protocol, inrepeat):
+    """
+    Given a line from a file with format:
+    add to the protocol an [# : End repeat nstep steps :] line
+
+    Parameters
+    -----------
+    nstep : int
+        Number of steps in a loop
+
+    iline : int
+        Counter for protocol lines
+
+    protocol : array of strings
+        Array with the reduced protocol
+
+    inrepeat : boolean
+        True if inside a loop
+
+    Returns
+    -------
+    protocol : array of strings
+        Array with the reduced protocol,
+        with the added new line
+
+    inrepeat : boolean
+        Set to False by this function
+
+    Examples
+    ---------
+    >>>> import preparenovonix.novonix_add as prep
+    >>>> protocol, inrepeat = prep.create_end_repeat(34,1,['Example'],True)
+    >>>> print(protocol[-1],inrepeat)
+    [0 : End Repeat 34 steps :]
+     False
+    """
+
+    new_line = "[" + str(iline - 1) + " : End Repeat " + str(nstep) + " steps :"
+    protocol.append(new_line + "] \n")
+
     inrepeat = False
 
-    return new_line, iline, nstep, protocol, inrepeat
+    return protocol, inrepeat
 
 
 def create_reduced_protocol(infile, verbose=False):
@@ -511,17 +596,19 @@ def create_reduced_protocol(infile, verbose=False):
 
             if command in commands or command.split()[0] == "Repeat":
                 iline += 1
-
                 if iline > 1 and not doneendrepeat:
                     # Append the new line
                     protocol.append(new_line + "] \n")
                     new_line = " "
 
                     # Create an 'End Repeat line if needed
-                    if istep == nstep and inrepeat:
-                        new_line, iline, nstep, protocol, inrepeat = create_end_repeat(
-                            new_line, iline, nstep, protocol, inrepeat
+                    if istep == nstep and inrepeat and not doneendrepeat:
+                        iline += 1
+                        protocol, inrepeat = create_end_repeat(
+                            nstep, iline, protocol, inrepeat
                         )
+                        new_line = " "
+                doneendrepeat = False
 
                 # Get the number of repetitions and repeated steps
                 if command.split()[0] == "Repeat":
@@ -536,16 +623,15 @@ def create_reduced_protocol(infile, verbose=False):
                             + str(infile)
                             + " \n"
                         )
-                    # donendrepeat = False
 
-                    unexpected = False
                     # Get the number of repetitions and steps within the loop
+                    unexpected = False
                     if fmt_space:
                         line = ff.readline()
                         ih += 1
                         fw = line.strip()
                         if fw[1:-1].split()[0] == "Repeat":
-                            ncount = fw[1:-1].split()[2]
+                            ncount = int(fw[1:-1].split()[2])
                         else:
                             unexpected = True
                         line = ff.readline()
@@ -556,14 +642,9 @@ def create_reduced_protocol(infile, verbose=False):
                         else:
                             unexpected = True
                     else:
-                        if ":" in fw:
-                            ncount = fw.split(":")[2].strip().split()[0]
-                        else:
-                            unexpected = True
-                        if ":" in fw:
-                            nstep = int(fw.split(":")[3][:-1])
-                        else:
-                            unexpected = True
+                        ncount, nstep, unexpected = rep_info_not_fmtspace(
+                            line, fmt_space
+                        )
 
                     if unexpected:
                         sys.exit(
@@ -574,13 +655,15 @@ def create_reduced_protocol(infile, verbose=False):
                             + " \n"
                         )
 
-                    new_line = "[" + str(iline) + " : Repeat " + ncount + " times :"
+                    new_line = (
+                        "[" + str(iline) + " : Repeat " + str(ncount) + " times :"
+                    )
                     istep = 0
                     inrepeat = True
                 else:
                     if inrepeat:
                         istep += 1
-                        istate = istate + int(ncount)
+                        istate = istate + ncount
                     else:
                         istate += 1
 
@@ -610,10 +693,17 @@ def create_reduced_protocol(infile, verbose=False):
                         new_line = new_line + ";" + subcommand
 
                 if subcommand.strip().casefold() == nv.endrepeat.casefold():
-                    # Create an 'End Repeat line
-                    new_line, iline, nstep, protocol, inrepeat = create_end_repeat(
-                        new_line, iline, nstep, protocol, inrepeat
+                    # Append the last line
+                    protocol.append(new_line + "] \n")
+                    iline += 1
+
+                    # Create an 'End Repeat line for files with fmt_space=True
+                    # which have an endrepeat statement
+                    protocol, inrepeat = create_end_repeat(
+                        nstep, iline + 1, protocol, inrepeat
                     )
+
+                    new_line = " "
                     doneendrepeat = True
 
             # Continue reading
@@ -635,7 +725,7 @@ def create_reduced_protocol(infile, verbose=False):
                 new_line = " "
 
         protocol.append(nv.end_rprotocol)
-        sys.exit()
+
         # Test the obtained protocol
         viable_prot = protocol_check(infile, istate, verbose=verbose)
 

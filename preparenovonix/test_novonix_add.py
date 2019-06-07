@@ -45,6 +45,21 @@ def test_protocol_check():
     assert prep.protocol_check("example_data/example_data_prep.csv", 103) is True
 
 
+def test_rep_info_not_fmtspace():
+    ncount, nstep, unexpected = prep.rep_info_not_fmtspace(
+        "[5: Repeat: 24 time(s) Node count: 4]", False
+    )
+    assert ncount == 24
+    assert nstep == 4
+    assert unexpected is False
+
+
+def test_create_end_repeat():
+    protocol, inrepeat = prep.create_end_repeat(34, 1, ["Example"], True)
+    assert protocol[-1].rstrip() == "[0 : End Repeat 34 steps :]"
+    assert inrepeat is False
+
+
 def test_create_reduced_protocol():
     prot, viable_prot = prep.create_reduced_protocol(exfile_prep)
     assert len(prot) > 1
