@@ -14,7 +14,7 @@ install:
 
 # command to run tests
 script:
-  - pytest --cov=./
+  - pytest --cov=./preparenovonix
 
 # Code coverage
 after_success:

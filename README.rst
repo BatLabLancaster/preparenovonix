@@ -86,8 +86,8 @@ List of the `Novonix`_ software versions the code has been tested against:
 .. |build| image:: https://travis-ci.org/BatLabLancaster/preparenovonix.svg?branch=master
     :target: https://travis-ci.org/BatLabLancaster/preparenovonix
 
-.. |coverage| image:: https://coveralls.io/repos/github/BatLabLancaster/preparenovonix/badge.svg?branch=master
-    :target: https://coveralls.io/github/BatLabLancaster/preparenovonix?branch=master
+.. |coverage| image:: https://codecov.io/gh/codecov/preparenovonix/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/BatLabLancaster/preparenovonix
 	     
 .. |docs| image:: https://readthedocs.org/projects/prepare-novonix-data/badge/?version=latest
    :target: https://prepare-novonix-data.readthedocs.io/en/latest/

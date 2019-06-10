@@ -43,7 +43,7 @@ def prepare_novonix(
 
     Examples
     ---------
-    >>>> import pycode.novonix_add as prep
+    >>>> import preparenovonix.novonix_prep as prep
 
     >>>> prep.prepare_novonix('example_data/example_data.csv',addstate=True,lprotocol=True,overwrite=False,verbose= False)
     File example_data_prep.csv has been prepared.
