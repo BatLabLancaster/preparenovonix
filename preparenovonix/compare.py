@@ -34,9 +34,8 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
 
     Examples
     ---------
-    >>>> from preparenovonix.compare import plot_vct
-
-    >>>> plot_vct('example_data/example_data.csv','example_data/example_data_prep.csv',first_loop=0,plot_type='pdf',plot_show=True)
+    >>> from preparenovonix.compare import plot_vct
+    >>> plot_vct('example_data/example_data.csv','example_data/example_data_prep.csv',first_loop=0,plot_type='pdf',plot_show=True)
     """
 
     after_file = after_file_name(before_file)

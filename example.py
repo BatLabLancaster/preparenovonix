@@ -10,4 +10,4 @@ prep.prepare_novonix(infile, addstate=True, lprotocol=True,
                      overwrite=False, verbose=True)
 
 # Compare the prepared file with the original one
-plot_vct(infile, first_loop=0, plot_type='pdf', plot_show=True)
+plot_vct(infile, first_loop=0, plot_type='png', plot_show=True)

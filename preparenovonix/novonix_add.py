@@ -31,11 +31,9 @@ def column_check(infile, col_name, verbose=False):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_variables as nv
-
-    >>>> import preparenovonix.novonix_add as prep
-
-    >>>> prep.column_check('example_data/example_data_prep.csv',nv.col_step)
+    >>> import preparenovonix.novonix_variables as nv
+    >>> import preparenovonix.novonix_add as prep
+    >>> prep.column_check('example_data/example_data_prep.csv',nv.col_step)
     True
     """
 
@@ -67,8 +65,8 @@ def state_check(state):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_add as prep
-    >>>> prep.state_check([0,1,2])
+    >>> import preparenovonix.novonix_add as prep
+    >>> prep.state_check([0,1,2])
     True
     """
 
@@ -119,9 +117,8 @@ def novonix_add_state(infile, verbose=False):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_add as prep
-
-    >>>> prep.novonix_add_state('example_data/example_data_prep.csv',verbose=True)
+    >>> import preparenovonix.novonix_add as prep
+    >>> prep.novonix_add_state('example_data/example_data_prep.csv',verbose=True)
     The file example_data/example_data_prep.csv already has a State column
     """
 
@@ -258,9 +255,8 @@ def select_com_val(index):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_add as prep
-
-    >>>> prep.select_com_val(2)
+    >>> import preparenovonix.novonix_add as prep
+    >>> prep.select_com_val(2)
     'np.logical_or(step == com_val1[index], step == nv.com_val2[index])'
     """
     if nv.com_val2[index] is None:
@@ -293,12 +289,10 @@ def read_reduced_protocol(infile, verbose=False):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_add as prep
-
-    >>>> protocol, continue_reading = prep.read_reduced_protocol(
+    >>> import preparenovonix.novonix_add as prep
+    >>> protocol, continue_reading = prep.read_reduced_protocol(
     'example_data/example_data_prep.csv',verbose=True)
-
-    >>>> print(continue_reading)
+    >>> print(continue_reading)
     False
     """
 
@@ -354,9 +348,8 @@ def protocol_check(infile, istate, verbose=False):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_add as prep
-
-    >>>> prep.protocol_check('example_data/example_data_prep.csv',103)
+    >>> import preparenovonix.novonix_add as prep
+    >>> prep.protocol_check('example_data/example_data_prep.csv',103)
     True
     """
 
@@ -441,9 +434,9 @@ def rep_info_not_fmtspace(line, fmt_space):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_add as prep
-    >>>> ncount, nstep, unexpected = prep.rep_info_not_fmtspace('[5: Repeat: 24 time(s) Node count: 4]',False)
-    >>>> print(ncount, nstep, unexpected)
+    >>> import preparenovonix.novonix_add as prep
+    >>> ncount, nstep, unexpected = prep.rep_info_not_fmtspace('[5: Repeat: 24 time(s) Node count: 4]',False)
+    >>> print(ncount, nstep, unexpected)
     24 4 False
     """
 
@@ -495,9 +488,9 @@ def create_end_repeat(nstep, iline, protocol, inrepeat):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_add as prep
-    >>>> protocol, inrepeat = prep.create_end_repeat(34,1,['Example'],True)
-    >>>> print(protocol[-1],inrepeat)
+    >>> import preparenovonix.novonix_add as prep
+    >>> protocol, inrepeat = prep.create_end_repeat(34,1,['Example'],True)
+    >>> print(protocol[-1],inrepeat)
     [0 : End Repeat 34 steps :]
      False
     """
@@ -533,14 +526,11 @@ def create_reduced_protocol(infile, verbose=False):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_add as prep
-
-    >>>> protocol, viable_prot = prep.create_reduced_protocol('example_data/example_data_prep.csv',verbose=True)
-
-    >>>> print(viable_prot)
+    >>> import preparenovonix.novonix_add as prep
+    >>> protocol, viable_prot = prep.create_reduced_protocol('example_data/example_data_prep.csv',verbose=True)
+    >>> print(viable_prot)
     True
-
-    >>>> print(protocol[0],protocol[-1])
+    >>> print(protocol[0],protocol[-1])
     [Reduced Protocol]
      [End Reduced Protocol]
     """
@@ -757,9 +747,8 @@ def novonix_add_loopnr(infile, verbose=False):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_add as prep
-
-    >>>> prep.novonix_add_loopnr('example_data/example_data_prep.csv',verbose=True)
+    >>> import preparenovonix.novonix_add as prep
+    >>> prep.novonix_add_loopnr('example_data/example_data_prep.csv',verbose=True)
     The file already has the column Loop number
     """
 

@@ -22,8 +22,7 @@ def after_file_name(file_to_open):
     Examples
     ---------
     >>> from preparenovonix.novonix_io import after_file_name
-
-    >>>> after_file_name('example_data/example_data.csv')
+    >>> after_file_name('example_data/example_data.csv')
     """
 
     # Extract the path and file name
@@ -64,8 +63,7 @@ def get_infile(file_to_open, overwrite=False):
     Examples
     ---------
     >>> from preparenovonix.novonix_io import get_infile
-
-    >>>> get_infile('example_data/example_data.csv',overwrite=False)
+    >>> get_infile('example_data/example_data.csv',overwrite=False)
     """
 
     # Extract the path and file name
@@ -99,9 +97,8 @@ def isnovonix(infile):
 
     Examples
     ---------
-    >>>> from preparenovonix.novonix_io import isnovonix
-
-    >>>> isnovonix('example_data/example_data.csv')
+    >>> from preparenovonix.novonix_io import isnovonix
+    >>> isnovonix('example_data/example_data.csv')
     True
     """
 
@@ -210,9 +207,8 @@ def icolumn(infile, column_name):
 
     Examples
     ---------
-    >>>> from preparenovonix.novonix_io import icolumn
-
-    >>>> icolumn('example_data/example_data.csv','Step Number')
+    >>> from preparenovonix.novonix_io import icolumn
+    >>> icolumn('example_data/example_data.csv','Step Number')
     2
     """
 
@@ -268,12 +264,10 @@ def read_column(infile, column_name, outtype="float"):
 
     Examples
     ---------
-    >>>> from preparenovonix.novonix_io import read_column
-
-    >>>> col = read_column('example_data/example_data_prep.csv',
+    >>> from preparenovonix.novonix_io import read_column
+    >>> col = read_column('example_data/example_data_prep.csv',
     'Step Number',outtype='int')
-
-    >>>> print(col[0])
+    >>> print(col[0])
     0
     """
 
@@ -340,8 +334,7 @@ def replace_file(newfile, infile, newbigger=False):
     Examples
     ---------
     >>> from preparenovonix.novonix_io import replace_file
-
-    >>>> replace_file("example_data/example_data_prep.csv","example_data/example_data.csv")
+    >>> replace_file("example_data/example_data_prep.csv","example_data/example_data.csv")
     """
 
     if newbigger:
@@ -384,9 +377,8 @@ def get_format(line):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_io as prep
-
-    >>>> fmt_space, commands = prep.get_format('[0: Open_circuit_storage:]')
+    >>> import preparenovonix.novonix_io as prep
+    >>> fmt_space, commands = prep.get_format('[0: Open_circuit_storage:]')
     False
     """
 
@@ -422,9 +414,8 @@ def get_command(line, fmt_space):
 
     Examples
     ---------
-    >>>> import preparenovonix.novonix_io as prep
-
-    >>>> command = prep.get_command('[Open circuit storage]',fmt_space=True)
+    >>> import preparenovonix.novonix_io as prep
+    >>> command = prep.get_command('[Open circuit storage]',fmt_space=True)
     Open circuit storage
     """
 

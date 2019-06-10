@@ -15,6 +15,7 @@ Documentation for ``preparenovonix``
    :maxdepth: 2
    
    readme_include.rst
+   overview.rst
    features.rst
    source/modules.rst
 

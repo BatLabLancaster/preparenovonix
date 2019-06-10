@@ -25,9 +25,8 @@ def count_tests(infile):
 
     Examples
     ---------
-    >>>> from preparenovonix.novonix_clean import count_tests
-
-    >>>> count_tests('example_data/example_data.csv')
+    >>> from preparenovonix.novonix_clean import count_tests
+    >>> count_tests('example_data/example_data.csv')
     2
     """
 
@@ -63,13 +62,10 @@ def header_data_columns(head_line, data_cols, header):
 
     Examples
     ---------
-    >>>> from preparenovonix.novonix_clean import header_data_columns
-
-    >>>> header = ['# Example header']
-
-    >>>> header_data_columns("a,b",[1,2,3],header)
-
-    >>>> print(header[-1])
+    >>> from preparenovonix.novonix_clean import header_data_columns
+    >>> header = ['# Example header']
+    >>> header_data_columns("a,b",[1,2,3],header)
+    >>> print(header[-1])
     a,b,dum0
 
     """
@@ -127,9 +123,8 @@ def capacity_failed_tests(icapacity, ntests, infile):
 
     Examples
     ---------
-    >>>> from preparenovonix.novonix_clean import capacity_failed_tests
-
-    >>>> capacity_failed_tests(2,"example_data/example_data.csv")
+    >>> from preparenovonix.novonix_clean import capacity_failed_tests
+    >>> capacity_failed_tests(2,"example_data/example_data.csv")
     0.4956497995
     """
 
@@ -171,9 +166,8 @@ def cleannovonix(infile):
 
     Examples
     ---------
-    >>>> from preparenovonix.novonix_clean import cleannovonix
-
-    >>>> cleannovonix('example_data/example_data.csv')
+    >>> from preparenovonix.novonix_clean import cleannovonix
+    >>> cleannovonix('example_data/example_data.csv')
     """
 
     # Count the number of tests
