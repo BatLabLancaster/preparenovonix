@@ -54,6 +54,7 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
     a_c = read_column(after_file, nv.col_c, outtype="float")
     a_s = read_column(after_file, nv.col_step, outtype="int")
     a_l = read_column(after_file, nv.loop_col, outtype="int")
+    a_p = read_column(after_file, nv.line_col, outtype="int")
 
     # Find the column positions in the file
     icol_t = icolumn(after_file, nv.col_t)
@@ -119,10 +120,14 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
     # Loop number
     axl = plt.subplot(gs[3, :])
     axl.set_xlabel(nv.col_t, fontsize=fs)
-    axl.set_ylabel(nv.loop_col, fontsize=fs)
+    axl.set_ylabel(nv.loop_col, fontsize=fs, color=cols[0])
 
-    axl.plot(
-        a_t[astart::], a_l[astart::], cols[0], linewidth=2.5, label="Loop number after"
+    axl.plot(a_t[astart::], a_l[astart::], cols[0], linewidth=2.5, label="Loop number")
+
+    axp = axl.twinx()
+    axp.set_ylabel("Protocol line", fontsize=fs, color=cols[2])
+    axp.plot(
+        a_t[astart::], a_p[astart::], cols[2], linewidth=2.5, label="Protocol line"
     )
 
     # Steps
