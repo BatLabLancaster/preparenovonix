@@ -14,8 +14,7 @@ install:
 
 # command to run tests
 script:
-  - pytest
-  - coverage run --source=./test
+  - pytest --cov=./
 
 # Code coverage
 after_success:
