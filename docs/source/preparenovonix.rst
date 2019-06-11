@@ -12,7 +12,6 @@ preparenovonix.compare module
     :undoc-members:
     :show-inheritance:
 
-       
 preparenovonix.novonix\_add module
 ----------------------------------
 
@@ -21,37 +20,33 @@ preparenovonix.novonix\_add module
     :undoc-members:
     :show-inheritance:
 
-
 preparenovonix.novonix\_clean module
 ------------------------------------
-       
+
 .. automodule:: preparenovonix.novonix_clean
     :members:
     :undoc-members:
     :show-inheritance:
 
-
 preparenovonix.novonix\_io module
-----------------------------------
-       
+---------------------------------
+
 .. automodule:: preparenovonix.novonix_io
     :members:
     :undoc-members:
     :show-inheritance:
 
-
 preparenovonix.novonix\_prep module
 -----------------------------------
-       
+
 .. automodule:: preparenovonix.novonix_prep
     :members:
     :undoc-members:
     :show-inheritance:
 
-
 preparenovonix.novonix\_variables module
 ----------------------------------------
-              
+
 .. automodule:: preparenovonix.novonix_variables
     :members:
     :undoc-members:

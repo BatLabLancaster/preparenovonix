@@ -1,22 +1,36 @@
-import setuptools
+import pathlib
+from setuptools import find_packages, setup
 
-with open("README.rst", "r") as fh:
-    long_description = fh.read()
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
 
-desc = "Clean and add extra information to data " + \
-    "produced by the battery cyclers from Novonix."
+# The text of the README file
+README = (HERE / "README.rst").read_text()
 
-setuptools.setup(
-    name='preparenovonix',
-    version='1.0.0',
-    py_modules=['preparenovonix'],
+desc = (
+    "Clean and add extra information to data "
+    + "produced by the battery cyclers from Novonix."
+)
+
+# This call to setup() does all the work
+setup(
+    name="preparenovonix",
+    version="0.1.0",
+    packages=find_packages(exclude=("tests",)),
     description=desc,
-    long_description=long_description,
+    long_description=README,
+    long_description_content_type="text/x-rst",
     url="https://github.com/BatLabLancaster/preparenovonix",
-    packages=setuptools.find_packages(),
+    license="MIT",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+    ],
+    include_package_data=True,
+    install_requires=[
+        "numpy>=1.15",
+        # Note: Matplotlib is loaded for test plot
+        "matplotlib>=3.0",
     ],
 )
