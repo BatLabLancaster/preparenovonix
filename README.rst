@@ -94,7 +94,7 @@ List of the `Novonix`_ software versions the code has been tested against:
    :target: https://prepare-novonix-data.readthedocs.io/en/latest/
    :alt: Documentation Status
 
-.. |pypi| image:: https://badge.fury.io/py/preparenovonix.svg
+.. |pypi| image:: https://img.shields.io/pypi/v/preparenovonix.svg
     :target: https://pypi.org/project/preparenovonix/
 	 
 .. |zenodo| image:: https://zenodo.org/badge/186994865.svg
