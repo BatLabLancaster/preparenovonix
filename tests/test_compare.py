@@ -1,4 +1,5 @@
-import sys, os
+import sys
+import os
 from preparenovonix import compare
 
 exfile = "example_data/example_data.csv"

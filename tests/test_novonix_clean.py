@@ -1,3 +1,4 @@
+import sys
 import os
 from shutil import copy
 import preparenovonix.novonix_variables as nv

@@ -1,3 +1,4 @@
+import sys
 import os
 import preparenovonix.novonix_variables as nv
 import preparenovonix.novonix_io as prep

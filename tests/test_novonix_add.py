@@ -1,3 +1,4 @@
+import sys
 import os
 from shutil import copy
 import preparenovonix.novonix_variables as nv
@@ -8,7 +9,8 @@ exfile_prep = "example_data/example_data_prep.csv"
 
 
 def test_column_cehck():
-    assert prep.column_check("example_data/example_data_prep.csv", nv.col_step) is True
+    assert prep.column_check(
+        "example_data/example_data_prep.csv", nv.col_step) is True
 
 
 def test_state_check():
