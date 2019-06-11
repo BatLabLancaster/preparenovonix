@@ -17,7 +17,7 @@ before_script:
   - pip install .
 
 script:
-  - pytest --cov=./preparenovonix
+  - pytest --cov=./preparenovonix tests/
 
 # Code coverage
 after_success:
