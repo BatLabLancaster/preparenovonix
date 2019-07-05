@@ -154,7 +154,7 @@ def plot_vct(before_file, first_loop=0, plot_type="pdf", plot_show=False):
     for text in leg.get_texts():
         text.set_color(cols[ii])
         ii += 1
-        leg.draw_frame(False)
+    leg.draw_frame(False)
 
     axc = axv.twinx()
     axc.set_ylabel(nv.col_c, fontsize=fs)

@@ -62,3 +62,8 @@ def test_get_command():
     strval = "Open circuit storage"
     assert prep.get_command("[" + strval + "]", fmt_space=True) == strval
     assert prep.get_command("[0 :" + strval + ":]", fmt_space=False) == strval
+
+
+def test_get_col_names():
+    col_names = prep.get_col_names(exfile_prep)
+    assert col_names[2] == nv.col_step

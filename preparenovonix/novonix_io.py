@@ -276,32 +276,32 @@ def read_column(infile, column_name, outtype="float"):
     if not answer:
         sys.exit("STOP Input not from Novonix, {}".format(infile))
 
+    # Find the position of the given column name
+    icol = icolumn(infile, column_name)
+    if icol < 0:
+        sys.exit(
+            "STOP novonix_io.readcolumn \n"
+            + "REASON "
+            + column_name
+            + " columnn \n"
+            + "      not found in "
+            + str(infile)
+            + " \n"
+        )
+
     # Initialise empty list
     column_data = []
 
     with open(infile, "r") as ff:
-        # Read until the line with [Data]
+        # Read until the data starts
         for line in ff:
-            if "[Data]" in line:
-                break
-
-        # Read the column names
-        line = ff.readline()
-
-        # Find the position of the given column name
-        icol = icolumn(infile, column_name)
-        if icol < 0:
-            sys.exit(
-                "STOP novonix_io.readcolumn \n"
-                + "REASON "
-                + column_name
-                + " columnn \n"
-                + "      not found in "
-                + str(infile)
-                + " \n"
-            )
+            if line.strip():
+                char1 = line.strip()[0]
+                if char1 in nv.numberstr:
+                    break
 
         # Read the column of interest
+        val = line.split(",")[icol].rstrip()
         for line in ff:
             val = line.split(",")[icol].rstrip()
             column_data.append(val)
@@ -431,3 +431,48 @@ def get_command(line, fmt_space):
         else:
             command = fw[1:-1]
     return command
+
+
+def get_col_names(infile):
+    """
+    Given a Novonix data file, read the names of the columns.
+
+    Parameters
+    -----------
+    infile : string
+        Name of the input Novonix data file
+
+    Returns
+    --------
+    col_names : list
+        Names of the columns in the file
+
+    Examples
+    ---------
+    >>> from preparenovonix.novonix_io import get_col_names
+    >>> col_names = get_col_names('example_data/example_data_prep.csv')
+    >>> print(col_names[2])
+    Step Number
+    """
+
+    # Check if the file has the expected structure for a Novonix data file
+    answer = isnovonix(infile)
+    if not answer:
+        sys.exit("STOP Input not from Novonix, {}".format(infile))
+
+    # Initialise the list
+    col_names = []
+
+    with open(infile, "r") as ff:
+        # Read until the line with [Data]
+        for line in ff:
+            if "[Data]" in line:
+                break
+
+        # Read the column names
+        col_names1 = ff.readline().split(",")
+        for i, coln1 in enumerate(col_names1):
+            coln = coln1.replace("\n", "").replace("\r", "").strip()
+            col_names.append(coln)
+
+    return col_names
