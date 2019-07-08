@@ -300,8 +300,11 @@ def read_column(infile, column_name, outtype="float"):
                 if char1 in nv.numberstr:
                     break
 
-        # Read the column of interest
+        # Read first value of the column
         val = line.split(",")[icol].rstrip()
+        column_data.append(val)
+
+        # Read the rest of the column of interest
         for line in ff:
             val = line.split(",")[icol].rstrip()
             column_data.append(val)
