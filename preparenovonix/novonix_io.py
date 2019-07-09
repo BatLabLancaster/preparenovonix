@@ -419,6 +419,7 @@ def get_command(line, fmt_space):
     ---------
     >>> import preparenovonix.novonix_io as prep
     >>> command = prep.get_command('[Open circuit storage]',fmt_space=True)
+    >>> print(command)
     Open circuit storage
     """
 
