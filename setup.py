@@ -15,7 +15,7 @@ desc = (
 # This call to setup() does all the work
 setup(
     name="preparenovonix",
-    version="1.0.2",
+    version="1.0.3",
     packages=find_packages(exclude=("tests",)),
     description=desc,
     long_description=README,
