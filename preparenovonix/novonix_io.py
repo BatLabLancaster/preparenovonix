@@ -480,3 +480,50 @@ def get_col_names(infile):
             col_names.append(coln)
 
     return col_names
+
+
+def get_num_measurements(infile):
+    """
+    Given a prepared Novonix data file, 
+    get the number of measurements
+
+    Parameters
+    -----------
+    infile : string
+        Name of the input Novonix data file
+
+    Returns
+    --------
+    nmeasurements : int
+        Number of measurements
+
+    Examples
+    ---------
+    >>> from preparenovonix.novonix_io import get_num_measurements
+    >>> get_num_measurements('example_data/example_data_prep.csv')
+    5752
+    """
+
+    # Check if the file has the expected structure for a Novonix data file
+    answer = isnovonix(infile)
+    if not answer:
+        sys.exit("STOP Input not from Novonix, {}".format(infile))
+
+    nmeasurements = 0
+
+    with open(infile, "r") as ff:
+        # Read until the data starts
+        for line in ff:
+            if line.strip():
+                char1 = line.strip()[0]
+                if char1 in nv.numberstr:
+                    break
+
+        # Include first measurement
+        nmeasurements += 1
+
+        # Count all the measurements
+        for line in ff:
+            nmeasurements += 1
+
+    return nmeasurements

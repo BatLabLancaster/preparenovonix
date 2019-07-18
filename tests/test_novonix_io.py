@@ -67,3 +67,8 @@ def test_get_command():
 def test_get_col_names():
     col_names = prep.get_col_names(exfile_prep)
     assert col_names[2] == nv.col_step
+
+
+def test_get_num_measurements():
+    nm = prep.get_num_measurements('example_data/example_data_prep.csv')
+    assert nm == 5752
